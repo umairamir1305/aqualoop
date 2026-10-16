@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.streamlit/*
+!.streamlit/config.toml
+*.egg-info/
+data/generated/*
+results/figures/*
+results/reports/*
+!data/generated/.gitkeep
+!results/figures/.gitkeep
+!results/reports/.gitkeep
