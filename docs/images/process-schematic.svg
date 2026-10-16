@@ -1,0 +1,83 @@
+<svg viewBox="0 0 560 312" width="100%" xmlns="http://www.w3.org/2000/svg"
+         font-family="'IBM Plex Mono', monospace">
+      <rect x="0" y="0" width="560" height="312" fill="#10141B"/>
+      <defs>
+        <clipPath id="tankClip">
+          <rect x="303" y="37" width="154" height="220" rx="2"/>
+        </clipPath>
+      </defs>
+
+      <!-- pipe: reservoir to tank inlet -->
+      <path d="M 135,196 V 70 H 380.0"
+            fill="none" stroke="#2A3242" stroke-width="10" stroke-linecap="round"/>
+      <path d="M 135,196 V 70 H 380.0"
+            fill="none" stroke="#2FBFA8" stroke-width="4" stroke-linecap="round"
+            opacity="0.56"/>
+      <path d="M 380.0,70 V 34"
+            fill="none" stroke="#2A3242" stroke-width="10" stroke-linecap="round"/>
+      <path d="M 380.0,70 V 34"
+            fill="none" stroke="#2FBFA8" stroke-width="4" stroke-linecap="round"
+            opacity="0.56"/>
+
+      <!-- pump -->
+      <circle cx="135" cy="130" r="16" fill="#171D27" stroke="#2A3242" stroke-width="2"/>
+      <path d="M 129,135 L 135,121 L 141,135 Z"
+            fill="#2FBFA8" opacity="0.56"/>
+      <text x="135" y="160" text-anchor="middle" font-size="10" fill="#8B93A6">PUMP 37%</text>
+
+      <!-- flow sensor on inlet, positioned clear of the tank body -->
+      <circle cx="230" cy="70" r="11" fill="#171D27" stroke="#2FBFA8" stroke-width="1.5"/>
+      <text x="230" y="74" text-anchor="middle" font-size="10" fill="#2FBFA8">F</text>
+      <text x="230" y="52" text-anchor="middle" font-size="9" fill="#8B93A6">83.6 mL/min</text>
+
+      <!-- reservoir -->
+      <rect x="40" y="196" width="110" height="64" rx="2"
+            fill="#171D27" stroke="#2A3242" stroke-width="2"/>
+      <rect x="43" y="220" width="104" height="37"
+            fill="#2FBFA8" opacity="0.28"/>
+      <text x="95.0" y="186" text-anchor="middle" font-size="10.5"
+            fill="#8B93A6">RESERVOIR</text>
+
+      <!-- process tank -->
+      <rect x="300" y="34" width="160" height="226" rx="3"
+            fill="#171D27" stroke="#2A3242" stroke-width="2"/>
+      <rect x="303" y="109.7" width="154" height="146.3"
+            fill="#2FBFA8" opacity="0.30" clip-path="url(#tankClip)"/>
+
+      <!-- level setpoint marker -->
+      <line x1="296" y1="110.7" x2="464" y2="110.7"
+            stroke="#8B93A6" stroke-width="1.3" stroke-dasharray="5,4"/>
+      <text x="468" y="113.7" font-size="9.5" fill="#8B93A6">SP 0.20 m</text>
+
+      <!-- heater -->
+      <path d="M 320,238 Q 328.57142857142856,245 337.14285714285717,238 Q 345.7142857142857,231 354.2857142857143,238 Q 362.85714285714283,245 371.42857142857144,238 Q 380.0,231 388.57142857142856,238 Q 397.1428571428571,245 405.7142857142857,238 Q 414.2857142857143,231 422.8571428571429,238 Q 431.42857142857144,245 440.0,238"
+            fill="none" stroke="#E8955A" stroke-width="3.5" stroke-linecap="round"
+            opacity="0.85"/>
+      <text x="380.0" y="254" text-anchor="middle" font-size="9.5"
+            fill="#8B93A6">HEATER 80%</text>
+
+      <!-- temperature sensor -->
+      <circle cx="434" cy="94" r="11" fill="#171D27" stroke="#E8955A" stroke-width="1.5"/>
+      <text x="434" y="98" text-anchor="middle" font-size="10" fill="#E8955A">T</text>
+
+      <!-- level sensor (ultrasonic, top, pointing down) -->
+      <rect x="368.0" y="20" width="24" height="10" rx="2"
+            fill="#171D27" stroke="#2FBFA8" stroke-width="1.5"/>
+      <text x="380.0" y="28" text-anchor="middle" font-size="8.5" fill="#2FBFA8">L</text>
+
+      <!-- tank label + live values -->
+      <text x="380.0" y="14" text-anchor="middle" font-size="10.5"
+            fill="#8B93A6">PROCESS TANK</text>
+      <text x="314" y="58" font-size="15" fill="#E8955A" font-weight="600">46.3 C</text>
+      <text x="314" y="76" font-size="15" fill="#2FBFA8" font-weight="600">0.201 m</text>
+
+      <!-- drain pipe back to reservoir -->
+      <path d="M 324,260 V 280 H 60 V 260"
+            fill="none" stroke="#2A3242" stroke-width="9" stroke-linecap="round"/>
+      <path d="M 324,260 V 280 H 60 V 260"
+            fill="none" stroke="#2FBFA8" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+      <text x="192.0" y="294" text-anchor="middle" font-size="9.5"
+            fill="#8B93A6">GRAVITY DRAIN</text>
+
+      
+    </svg>
