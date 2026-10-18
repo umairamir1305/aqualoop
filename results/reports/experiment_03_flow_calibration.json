@@ -1,0 +1,10 @@
+{
+  "experiment": "experiment_03_flow_calibration",
+  "slope": 0.9967211759938034,
+  "intercept": 2.3479939043019357e-08,
+  "rmse": 6.228938455173284e-08,
+  "max_abs_error": 1.1910301080990576e-07,
+  "mean_pct_error": 3.5797639003074635,
+  "n_points": 21,
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}

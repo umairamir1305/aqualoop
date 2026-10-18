@@ -148,6 +148,12 @@ def inject_css():
         border-color: {TEXT};
         color: {BG};
     }}
+    /* Recent Streamlit versions wrap the label in inner elements that set their own
+       colour, which left the label light-on-light (invisible) on primary-button hover.
+       Make every descendant follow the button's colour. */
+    .stButton > button *, .stDownloadButton > button * {{
+        color: inherit;
+    }}
 
     /* inputs */
     .stSlider [data-baseweb="slider"] {{ padding-top: 0.4rem; }}

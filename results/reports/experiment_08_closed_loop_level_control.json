@@ -1,0 +1,11 @@
+{
+  "experiment": "experiment_08_closed_loop_level_control",
+  "rise_time_s": 1952.0,
+  "overshoot_pct": 0.0,
+  "settling_time_s": 3369.0,
+  "steady_state_error": 0.0018774412125806305,
+  "max_abs_error": 0.12000000000000001,
+  "iae": 107.1715208684637,
+  "ise": 6.2701469607461835,
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}

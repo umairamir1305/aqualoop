@@ -1,0 +1,11 @@
+{
+  "experiment": "experiment_05_closed_loop_temperature_control",
+  "rise_time_s": 3536.0,
+  "overshoot_pct": 8.036143326630452,
+  "settling_time_s": 11559.0,
+  "steady_state_error": 0.1288364013635476,
+  "max_abs_error": 20.0,
+  "iae": 48660.81522668967,
+  "ise": 455634.91485553794,
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}

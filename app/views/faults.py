@@ -1,3 +1,5 @@
+import copy
+
 import plotly.graph_objects as go
 import streamlit as st
 
@@ -48,7 +50,10 @@ total_min = st.slider("Total run length (simulated minutes)", 20, 180, 60)
 
 if st.button("Run with this condition", type="primary"):
     start_s, duration_s = start_min * 60.0, duration_min * 60.0
-    handles = build_handles(cfg, initial_level_m=0.15, initial_temp_c=25.0)
+    # Private copy: schedules mutate the config while active, and a run can end
+    # with a condition still active, which would otherwise leak into later runs.
+    run_cfg = copy.deepcopy(cfg)
+    handles = build_handles(run_cfg, initial_level_m=0.15, initial_temp_c=25.0)
 
     if kind_group == "Disturbance":
         schedule = DisturbanceSchedule([Disturbance(kind=kind, start_s=start_s,
@@ -61,7 +66,7 @@ if st.button("Run with this condition", type="primary"):
         schedule = FaultSchedule([Fault(**f_kwargs)])
         on_step, dist_fn, fault_fn = schedule.apply_on_step, None, schedule.state_label
 
-    df = run_simulation(cfg, temperature_setpoint=45.0, level_setpoint=0.15, handles=handles,
+    df = run_simulation(run_cfg, temperature_setpoint=45.0, level_setpoint=0.15, handles=handles,
                          duration_s=total_min * 60.0, on_step=on_step,
                          disturbance_state_fn=dist_fn, fault_state_fn=fault_fn)
     st.session_state.fault_test_df = df

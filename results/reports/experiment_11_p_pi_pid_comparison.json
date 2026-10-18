@@ -1,0 +1,36 @@
+{
+  "experiment": "experiment_11_p_pi_pid_comparison",
+  "comparison": [
+    {
+      "controller": "P",
+      "rise_time_s": null,
+      "overshoot_pct": 0.0,
+      "settling_time_s": null,
+      "steady_state_error": 4.541058329507786,
+      "max_abs_error": 20.0,
+      "iae": 113872.04680646914,
+      "ise": 818172.4131541087
+    },
+    {
+      "controller": "PI",
+      "rise_time_s": 3536.0,
+      "overshoot_pct": 8.043280176758536,
+      "settling_time_s": 11555.0,
+      "steady_state_error": 0.12892020548950536,
+      "max_abs_error": 20.0,
+      "iae": 48660.531385005175,
+      "ise": 455636.5809945805
+    },
+    {
+      "controller": "PID",
+      "rise_time_s": 3536.0,
+      "overshoot_pct": 8.036143326630452,
+      "settling_time_s": 11559.0,
+      "steady_state_error": 0.1288364013635476,
+      "max_abs_error": 20.0,
+      "iae": 48660.81522668967,
+      "ise": 455634.91485553794
+    }
+  ],
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}

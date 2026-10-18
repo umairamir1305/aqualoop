@@ -1,0 +1,10 @@
+{
+  "experiment": "experiment_01_temperature_calibration",
+  "slope": 0.9999350649350653,
+  "intercept": 0.014826839826831924,
+  "rmse": 0.041441879735368684,
+  "max_abs_error": 0.07505411255412042,
+  "mean_pct_error": 0.08960305292044195,
+  "n_points": 21,
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}

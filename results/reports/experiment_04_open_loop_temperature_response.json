@@ -1,0 +1,8 @@
+{
+  "experiment": "experiment_04_open_loop_temperature_response",
+  "step_size_pct": 40.0,
+  "identified_gain_c_per_pct": 0.316176266586018,
+  "identified_tau_s": 4050.0,
+  "identified_theta_s": 87.0,
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}

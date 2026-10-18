@@ -1,0 +1,8 @@
+{
+  "experiment": "experiment_09_level_disturbance_rejection",
+  "disturbance_kind": "extra_outflow",
+  "disturbance_magnitude_m3s": 2.5e-06,
+  "max_dip_m": 0.04574845098904208,
+  "recovery_time_s": 3356.0,
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}

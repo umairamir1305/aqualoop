@@ -1,0 +1,9 @@
+{
+  "experiment": "experiment_10_coupled_full_system",
+  "level_setpoint_change_s": 7000.0,
+  "level_setpoint_before_m": 0.1,
+  "level_setpoint_after_m": 0.2,
+  "temperature_before_c": 45.14494765502486,
+  "temperature_dip_from_level_change_c": 7.0519302309912035,
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}

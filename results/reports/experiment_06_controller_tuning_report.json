@@ -1,0 +1,38 @@
+{
+  "experiment": "experiment_06_controller_tuning_report",
+  "temperature_model": {
+    "gain": 0.316176266586018,
+    "tau_s": 4050.0,
+    "theta_s": 87.0
+  },
+  "temperature_pid_gains_identified": {
+    "kp": 11.650123320015984,
+    "ki": 0.002876573659263206,
+    "kd": 58.25061660007992,
+    "output_min": 0.0,
+    "output_max": 100.0,
+    "derivative_filter_tau": 2.0
+  },
+  "temperature_pid_gains_in_use": {
+    "kp": 11.2204,
+    "ki": 0.0027,
+    "kd": 56.102
+  },
+  "level_model": {
+    "gain": 0.003293980416374778,
+    "tau_s": 3231.0,
+    "theta_s": 88.0
+  },
+  "level_pi_gains_identified": {
+    "kp": 1095.0378437166319,
+    "ki": 0.33891607666871926,
+    "output_min": 0.0,
+    "output_max": 100.0
+  },
+  "level_pi_gains_in_use": {
+    "kp": 1095.0378,
+    "ki": 0.3389
+  },
+  "note": "Level PI gains in use differ from the gains identified in this run by at most 0.0047%. Temperature PID gains in use differ from the gains identified in this run by up to 6.1%. The temperature gains in configuration.py come from an earlier identification (see the PIDConfig docstring) and were not regenerated from this run.",
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}

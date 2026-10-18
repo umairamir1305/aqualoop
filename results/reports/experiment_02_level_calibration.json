@@ -1,0 +1,10 @@
+{
+  "experiment": "experiment_02_level_calibration",
+  "slope": 0.9974025974025972,
+  "intercept": 0.0006277056277056444,
+  "rmse": 0.0015876247867205931,
+  "max_abs_error": 0.0035255411255411123,
+  "mean_pct_error": 1.2582999568010886,
+  "n_points": 21,
+  "data_label": "SIMULATED DATA, not a physical measurement"
+}
