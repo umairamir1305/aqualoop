@@ -2,8 +2,8 @@
 Simulation engine.
 
 Runs the actual closed feedback loop, one timestep at a time: read the
-plant's true state, generate sensor measurements from it, calibrate and
-filter those measurements, let the controllers compute new actuator
+plant's true state, generate sensor measurements from it, filter those
+measurements (EMA), let the controllers compute new actuator
 commands from them, log everything, then advance the plant physics using
 those commands. Every value in the returned dataset comes out of this
 loop; nothing is pre-drawn or faked to look like a control response.
@@ -145,7 +145,10 @@ def run_simulation(config: AqualoopConfig,
         heater_cmd = pid_terms.output
         pump_cmd = pi_terms.output
 
-        true_flow = pump_flow(pump_cmd, handles.plant.config.pump)
+        # Same effective command the plant will receive in plant.step below, so a
+        # pump_effectiveness fault shows up in the logged and measured flow too.
+        true_flow = pump_flow(pump_cmd * handles.plant.pump_effectiveness,
+                              handles.plant.config.pump)
         measured_flow = handles.flow_sensor.measure(true_flow)
 
         controller_mode = "auto" if (handles.temperature_pid.auto_mode and handles.level_pi.auto_mode) else "manual"

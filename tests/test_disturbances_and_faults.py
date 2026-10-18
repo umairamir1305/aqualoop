@@ -87,3 +87,24 @@ def test_combine_on_step_runs_both_schedules():
 
     assert (df["disturbance_state"] == "ambient_temp_step").any()
     assert (df["fault_state"] == "sensor_bias").any()
+
+
+def test_pump_effectiveness_fault_is_reflected_in_the_logged_flow():
+    """Regression: the logged true flow used to ignore the pump fault and report
+    the flow the pump would have delivered if healthy."""
+    from src.plant.tank import pump_flow
+
+    cfg = AqualoopConfig()
+    handles = build_handles(cfg, initial_level_m=0.05, initial_temp_c=25.0)
+    schedule = FaultSchedule([
+        Fault(kind="pump_effectiveness", start_s=0.0, duration_s=100.0, magnitude=0.5),
+    ])
+    # Level far below setpoint, so the PI controller saturates the pump at 100%.
+    df = run_simulation(cfg, temperature_setpoint=25.0, level_setpoint=0.25, handles=handles,
+                         duration_s=30.0, on_step=schedule.apply_on_step,
+                         fault_state_fn=schedule.state_label)
+
+    assert df["pump_command_pct"].iloc[10] == 100.0
+    expected = pump_flow(50.0, cfg.pump)
+    assert abs(df["true_flow_m3s"].iloc[10] - expected) < 1e-12
+    assert df["true_flow_m3s"].iloc[10] < pump_flow(100.0, cfg.pump)

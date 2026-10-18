@@ -14,6 +14,10 @@ from typing import Optional
 
 import numpy as np
 
+# np.trapezoid was added in NumPy 2.0; np.trapz is the older name. Prefer the new
+# one so NumPy 1.26 (the lower bound in requirements.txt) keeps working.
+_trapezoid = getattr(np, "trapezoid", None) or np.trapz
+
 
 @dataclass
 class StepMetrics:
@@ -37,8 +41,8 @@ def compute_step_metrics(t: np.ndarray, y: np.ndarray, setpoint: float,
 
     error = setpoint - y
     max_abs_error = float(np.max(np.abs(error)))
-    iae = float(np.trapezoid(np.abs(error), t))
-    ise = float(np.trapezoid(error ** 2, t))
+    iae = float(_trapezoid(np.abs(error), t))
+    ise = float(_trapezoid(error ** 2, t))
     steady_state_error = float(np.mean(np.abs(error[-steady_state_window:])))
 
     rise_time_s = None

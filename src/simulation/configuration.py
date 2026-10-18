@@ -103,8 +103,9 @@ class PIDConfig:
     test of the thermal plant (see docs/tuning notes): identified process
     gain 0.325 degC per %, tau approximately 4160 s, then SIMC tuning with
     lambda = tau/4. These are the "final selected gains" after checking the
-    closed-loop step response; see AqualoopConfig docstring for the
-    identified-vs-final gain distinction.
+    closed-loop step response. They differ slightly from what experiments 4 and 6
+    identify with the current code (see
+    results/reports/experiment_06_controller_tuning_report.json).
     """
     kp: float = 11.2204
     ki: float = 0.0027

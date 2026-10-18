@@ -42,3 +42,18 @@ def test_overview_runs_a_simulation_end_to_end():
     at.run(timeout=30)
     at.button[0].click().run(timeout=60)
     assert not at.exception
+
+
+def test_fault_page_does_not_leak_a_condition_into_the_session_config():
+    """Regression: a run that ends while a disturbance is still active used to
+    leave the modified ambient temperature in the shared session config."""
+    at = AppTest.from_file(str(PROJECT_ROOT / "app/views/faults.py"))
+    at.run(timeout=30)
+    # Default kind is ambient_temp_step. Start at 50 min, last 30, total run 60:
+    # the run ends while the disturbance is still active.
+    at.slider[1].set_value(50)
+    at.slider[2].set_value(30)
+    at.slider[3].set_value(60)
+    at.button[0].click().run(timeout=60)
+    assert not at.exception
+    assert at.session_state["config"].thermal.ambient_temp_c == 25.0

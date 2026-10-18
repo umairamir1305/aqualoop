@@ -3,8 +3,8 @@ Controller tuning.
 
 Rather than hand-picking PID and PI gains, this module identifies a
 first-order-plus-dead-time (FOPDT) approximation of the process from an
-open-loop step test, then computes gains from that model with a
-Ziegler-Nichols-style reaction-curve rule. This mirrors how a real process
+open-loop step test, then computes gains from that model with
+Skogestad's SIMC rule (see _simc_pi_gains for why not Ziegler-Nichols). This mirrors how a real process
 would be tuned: bump the actuator in manual mode, record the response,
 fit a simple model, calculate a starting set of gains, then adjust.
 

@@ -209,17 +209,31 @@ def experiment_06_controller_tuning_report():
                                   baseline_value=baseline_value)
     pi_gains = pi_from_foprd(level_model)
 
+    temp_in_use = {"kp": cfg.temperature_pid.kp, "ki": cfg.temperature_pid.ki,
+                   "kd": cfg.temperature_pid.kd}
+    level_in_use = {"kp": cfg.level_pi.kp, "ki": cfg.level_pi.ki}
+
+    def _max_diff_pct(identified, in_use):
+        return max(abs(in_use[k] - identified[k]) / abs(identified[k]) for k in in_use) * 100.0
+
+    temp_diff = _max_diff_pct(pid_gains, temp_in_use)
+    level_diff = _max_diff_pct(pi_gains, level_in_use)
+    note = (f"Level PI gains in use differ from the gains identified in this run by at most "
+            f"{level_diff:.2g}%. Temperature PID gains in use differ from the gains identified "
+            f"in this run by up to {temp_diff:.1f}%. ")
+    if temp_diff > 0.5:
+        note += ("The temperature gains in configuration.py come from an earlier identification "
+                 "(see the PIDConfig docstring) and were not regenerated from this run.")
+
     summary = {
         "experiment": name,
         "temperature_model": vars(temp_model),
         "temperature_pid_gains_identified": pid_gains,
-        "temperature_pid_gains_in_use": {
-            "kp": cfg.temperature_pid.kp, "ki": cfg.temperature_pid.ki, "kd": cfg.temperature_pid.kd},
+        "temperature_pid_gains_in_use": temp_in_use,
         "level_model": vars(level_model),
         "level_pi_gains_identified": pi_gains,
-        "level_pi_gains_in_use": {"kp": cfg.level_pi.kp, "ki": cfg.level_pi.ki},
-        "note": ("Gains in use match the identified gains in this project; "
-                 "they were not hand-adjusted after identification."),
+        "level_pi_gains_in_use": level_in_use,
+        "note": note.strip(),
     }
     paths = save_outputs(name, df=None, fig=None, summary=summary)
     return {"summary": summary, "paths": paths, "df": df}
@@ -425,6 +439,12 @@ def experiment_11_p_pi_pid_comparison():
         "PID": dict(kp=base_kp, ki=base_ki, kd=base_kd),
     }
 
+    # PI and PID land almost on top of each other on this plant, so PI is drawn
+    # wide and translucent underneath and PID thin on top; otherwise PI is invisible.
+    line_styles = {"P": dict(linewidth=2.0),
+                   "PI": dict(linewidth=6.0, alpha=0.45),
+                   "PID": dict(linewidth=1.5)}
+
     fig, ax = plt.subplots(figsize=(8, 5))
     rows = []
     all_dfs = {}
@@ -440,9 +460,12 @@ def experiment_11_p_pi_pid_comparison():
         metrics = compute_step_metrics(df["time_s"].values, df["true_temperature_c"].values,
                                         setpoint=45.0, initial_value=25.0)
         rows.append({"controller": label, **vars(metrics)})
-        ax.plot(df["time_s"], df["true_temperature_c"], label=label)
+        ax.plot(df["time_s"], df["true_temperature_c"], label=label, **line_styles[label])
 
     ax.plot(all_dfs["PID"]["time_s"], all_dfs["PID"]["temperature_setpoint_c"], "k--", label="setpoint")
+    overshoot = {r["controller"]: r["overshoot_pct"] for r in rows}
+    ax.text(0.98, 0.45, f"PI and PID overlap on this plant\novershoot {overshoot['PI']:.2f}% vs {overshoot['PID']:.2f}%",
+            transform=ax.transAxes, ha="right", va="center", fontsize=9)
     ax.set_xlabel("time (s)")
     ax.set_ylabel("temperature (C)")
     ax.set_title("P vs PI vs PID: same plant, same starting conditions")
